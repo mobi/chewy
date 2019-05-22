@@ -68,7 +68,7 @@ module Chewy
     end
 
     initializer 'chewy.request_strategy' do |app|
-      if app.config.middleware.include?("RailsSemanticLogger::Rack::Logger")
+      if Rails.env.production? || Rails.env.demo? || Rails.env.stage? || Rails.env.sandbox?
         app.config.middleware.insert_after(RailsSemanticLogger::Rack::Logger, RequestStrategy)
       else
         app.config.middleware.insert_after(Rails::Rack::Logger, RequestStrategy)
