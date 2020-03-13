@@ -42,12 +42,8 @@ module Chewy
       load 'tasks/chewy.rake'
     end
 
-    console do |app|
-      if app.sandbox?
-        Chewy.strategy(:bypass)
-      else
-        Chewy.strategy(:urgent)
-      end
+    console do |_app|
+      Chewy.strategy(:urgent)
       puts "Chewy console strategy is `#{Chewy.strategy.current.name}`"
     end
 
